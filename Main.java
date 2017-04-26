@@ -1,8 +1,11 @@
 import java.util.Scanner;
 public class Main {
+	/**
+	*n->number of subjects		
+	*m-> counter to see how many classes to attend
+	*min -> Minimum %age required
+	*/
 
-	//n->number of subjects		m-> counter to see how many classes to attend
-	//min -> Minimum %age required
 	int m,n=10,min;	
 	//Indexing subjects in an array 
 	int[] subjects=new int[n];
@@ -28,19 +31,19 @@ public class Main {
 	{
 		int i;
 		Scanner w=new Scanner(System.in);
-		System.out.println("Enter the number of subjects:");
+		System.out.println("Enter the number of subjects:\t");
 		n=w.nextInt();
-		System.out.println("Enter the minimum required percentage:");
+		System.out.println("Enter the minimum required percentage:\t");
 		min=w.nextInt();
-		System.out.println("\n\nPlease enter details for each subject:");
+		System.out.println("\n\nPlease enter details for each subject:\t");
 		for(i=0;i<n;i++)
 		{
-			System.out.println("\n\n");
-			System.out.print("Subject "+(i+1)+" name:");
+			System.out.println("\n");
+			System.out.print("Subject "+(i+1)+" name:\t");
 			subjectName[i]=w.next();
-			System.out.println("Enter classes attended:");
+			System.out.println("Enter classes attended:\t");
 			attended[i]=w.nextInt();
-			System.out.println("Enter classes conducted:");
+			System.out.println("Enter classes conducted:\t");
 			totClasses[i]=w.nextInt();
 		}
 		w.close();
@@ -48,6 +51,8 @@ public class Main {
 	
 	void compute()
 	{
+		//TODO maybe get a count of how many more classes will be conducted [so that one can predict how much to bunk?] 
+
 		for(int i=0;i<n;i++)	// For each subject computation takes place
 		{
 			m=0;
