@@ -1,5 +1,6 @@
 import java.util.Scanner;
-public class Main {
+
+class SubjectStorer {
 	/**
 	*n->number of subjects		
 	*m-> counter to see how many classes to attend
@@ -17,7 +18,7 @@ public class Main {
 	//Storing names of subjects
 	String[] subjectName;
 
-	public Main()
+	public SubjectStorer()
 	{
 		int i;
 		Scanner w=new Scanner(System.in);
@@ -44,41 +45,11 @@ public class Main {
 		}
 	}
 	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Main obj=new Main();
-		Scanner sc = new Scanner(System.in);
-		System.out.println("\n[+] Enter 1 if you know how many more classes will be held for each subject");
-		System.out.println("[+] Enter any other number if you aren't sure and would like to know after attending how many classes your attendance will be above minimum");
-		System.out.print("[*]: ");
-		int x;
-		try
-		{
-			x = sc.nextInt();
-		}
-		catch (NumberFormatException n)
-		{
-			System.out.println ("[-] Illegal number encountered: Assuming you do not know number of classes that'll be held");
-			x = 0;
-		}
-		if (x == 1)
-		{
-			obj.computeFuture();
-		}
-		else
-		{
-			obj.compute();
-			obj.output();
-		}
-	}
-	
-	void computeFuture()
+	public void computeFuture()
 	{
 		/**
 		*Asks user to input expected number of classes to be held in the future.
 		*Enables more accurate prediction on bunkable classes
-		*Addresses TODO in compute()
 		*/
 		Scanner sc = new Scanner(System.in);
 		int i = 0;
@@ -106,16 +77,14 @@ public class Main {
 			System.out.print(m + "\n");
 		}
 	}
-	void compute()
+	public void compute()
 	{
-		//TODO maybe get a count of how many more classes will be conducted [so that one can predict how much to bunk?] 
-
 		for(int i=0;i<n;i++)	// For each subject computation takes place
 		{
 			m=0;
 			while(true)
 			{
-				if(min<=(100*((float) attended[i]+m)/(totClasses[i]+m)))
+				if(min <= (100*((float) attended[i]+m)/(totClasses[i]+m)))
 					break;
 				else
 					++m;
@@ -124,11 +93,52 @@ public class Main {
 		}
 	}
 	
-	void output()
+	public void output()
 	{
 		for(int i=0;i<n;i++)
 		{
 			System.out.println("\n[+] "+ subjectName[i]+ " : Attending "+toAttend[i]+" classes more will keep you safe");
 		}
 	}
+
+	public String[] getSubjectNames()	{ return subjectName; }
+
+	public int[] getToAttend()	{ return toAttend; }
+
+	public int[] getAttended()	{ return attended; }
+
+	public int[] getTotClasses() { return totClasses; }
+
+}
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		SubjectStorer obj = new SubjectStorer();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\n[+] Enter 1 if you know how many more classes will be held for each subject");
+		System.out.println("[+] Enter any other number if you aren't sure and would like to know after attending how many classes your attendance will be above minimum");
+		System.out.print("[*]: ");
+		int x;
+		try
+		{
+			x = sc.nextInt();
+		}
+		catch (NumberFormatException n)
+		{
+			System.out.println ("[-] Illegal number encountered: Assuming you do not know number of classes that'll be held");
+			x = 0;
+		}
+		if (x == 1)
+		{
+			obj.computeFuture();
+		}
+		else
+		{
+			obj.compute();
+			obj.output();
+		}
+	}
+	
 }
